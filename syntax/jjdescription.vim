@@ -59,6 +59,9 @@ syn match   jjdescriptionHeader	"\%(^JJ:\s*\)\@<=\S.*:\%(\n^$\)\@!$" contained c
 syn match   jjdescriptionType		"\%(^JJ:\s*\)\@<=[CRMAD]\ze " contained containedin=jjdescriptionComment nextgroup=jjdescriptionFile skipwhite
 syn match   jjdescriptionFile		".*" contained
 
+" Separator lines for multiple change descriptions (e.g. 'jj split').
+syn match   jjdescriptionSeparator	"^JJ:\s*describe\s\+\S\+\s*\(--\+\)\?\s*$" contained containedin=jjdescriptionComment
+
 syn region  jjdescriptionSelected	start=/^\z(^JJ:\s*\)This commit contains the following changes:$/ end=/^\z1$\|^\z1\@!/ contains=jjdescriptionHeader,jjdescriptionSelectedType containedin=jjdescriptionComment contained transparent fold
 
 syn match   jjdescriptionSelectedType		"\%(^JJ:\s*\)\@<=[CRMAD]\ze " contained nextgroup=jjdescriptionSelectedFile skipwhite
@@ -69,6 +72,7 @@ hi def link jjdescriptionComment		Comment
 hi def link jjdescriptionSelectedType	jjdescriptionType
 hi def link jjdescriptionType		Type
 hi def link jjdescriptionHeader		PreProc
+hi def link jjdescriptionSeparator	@comment.note
 hi def link jjdescriptionSelectedFile	jjdescriptionFile
 hi def link jjdescriptionFile		Constant
 hi def link jjdescriptionBlank		Error
